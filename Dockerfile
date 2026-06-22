@@ -1,1 +1,2 @@
-FROM hello-world
+FROM alpine:latest
+COPY testfile /hello

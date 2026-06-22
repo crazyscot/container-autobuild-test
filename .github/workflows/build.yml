@@ -17,7 +17,11 @@ jobs:
     permissions:
       packages: write
     env:
-      TAG: ${{ github.ref_name }}
+      TAG: |-
+        ${{ case(
+          github.event_name == 'push', github.ref_name,
+          'unknown'
+        ) }}
 
     steps:
       - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # 6.0.1

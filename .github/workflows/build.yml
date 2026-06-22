@@ -4,6 +4,7 @@ on:
   push:
     tags:
       - '[0-9]+.[0-9]+.[0-9]+'
+  pull_request:
 
 permissions: {}
 
@@ -29,4 +30,5 @@ jobs:
       - name: Build
         run: docker build . --tag ${{ env.IMAGE }}:${{ env.TAG }}
       - name: Push the image
+        if: ${{ github.event_name == 'push' }}
         run: docker push ${{ env.IMAGE }}:${{ env.TAG }}

@@ -1,19 +1,22 @@
 name: publish
 
 on:
-  push
+  push:
+    tags:
+      - '[0-9]+.[0-9]+.[0-9]+'
 
 permissions: {}
 
 env:
   IMAGE: ghcr.io/crazyscot/container-autobuild-test
-  TAG: latest
 
 jobs:
   build:
     runs-on: ubuntu-latest
     permissions:
       packages: write
+    env:
+      TAG: ${{ github.ref_name }}
 
     steps:
       - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # 6.0.1
